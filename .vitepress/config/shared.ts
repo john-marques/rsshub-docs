@@ -24,6 +24,7 @@ export const shared = defineConfig({
   title: "RSSHub",
   description: "Everything is RSSible 🧡",
   srcDir: 'src',
+  outDir: 'docs/.vitepress/dist',
   base: '/rsshub-docs/',
   lastUpdated: true,
   ignoreDeadLinks: true,
