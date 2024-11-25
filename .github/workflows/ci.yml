@@ -27,15 +27,15 @@ jobs:
       - name: Build docs
         run: pnpm run docs:build
 
-  automerge:
-    if: github.triggering_actor == 'dependabot[bot]' && github.event_name == 'pull_request'
+  # Deployment job
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     needs: build
     runs-on: ubuntu-latest
-    permissions:
-      pull-requests: write
-      contents: write
+    name: Deploy
     steps:
-      - uses: fastify/github-action-merge-dependabot@v3
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          target: minor
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
